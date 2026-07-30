@@ -12,30 +12,28 @@ import java.time.Duration;
 public class Topic_03_AlwayRun {
     WebDriver driver;
 
-    @BeforeClass(alwaysRun = true)
-    public void beforeClass() {
+    @BeforeClass
+    public void initBrowserDriver() {
         driver = new FirefoxDriver();
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(30));
-        System.out.println("Run Before Class");
+        driver.get("https://live.techpanda.org/index.php/");
+        driver.manage().window().maximize();
 
-        Assert.assertTrue(false);
-
-        // Nó bị fail ở BeforeClass thì các testcase/ after sẽ bị skip
+        Assert.assertEquals(driver.getTitle(), "Home Page");
     }
 
     @Test
-    public void TC_01_() {
-        System.out.println("Run testcase 01");
+    public void TC_01(){
+        System.out.println("Test 01");
     }
 
     @Test
-    public void TC_02_() {
-        System.out.println("Run testcase 02");
+    public void TC_02(){
+        System.out.println("Test 02");
     }
 
-    @AfterClass(alwaysRun = true)
-    public void afterClass() {
+    @AfterClass (alwaysRun = true) // Ép cho hàm này bắt buộc phải chạy nếu Before mà sai
+    public void cleanBrowserDriver() {
         driver.quit();
-        System.out.println("Run After Class");
     }
+
 }

@@ -23,7 +23,7 @@ public class Topic_02_Assert {
     }
 
     private boolean isElementDisplayed(By locator) {
-        return driver.findElement(locator).isDisplayed()
+        return driver.findElement(locator).isDisplayed();
     }
 
 
